@@ -1,0 +1,18 @@
+ref: napalm.confirm_commit
+label: "Confirm Pending Commit (Mutating)"
+description: "Confirm a device-wide pending commit-confirm operation where EOS, IOS, or Junos supports it"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: napalm_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  confirm: {type: boolean, description: "Explicitly authorize confirmation of the pending commit", const: true, required: true}
+output:
+  operation: {type: string, required: true}
+  result: {type: object, required: true}
+tags: [napalm, mutating, configuration, commit-confirm]

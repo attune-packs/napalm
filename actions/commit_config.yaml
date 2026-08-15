@@ -1,0 +1,23 @@
+ref: napalm.commit_config
+label: "Stage and Commit Configuration (Mutating)"
+description: "In one connection, stage the exact supplied candidate, compare it, and commit after explicit confirmation"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: napalm_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  config: {type: string, description: "Exact candidate configuration text, limited to 2 MiB", required: true}
+  mode: {type: string, description: "Merge or full replacement", enum: [merge, replace], default: merge, required: false}
+  confirm: {type: boolean, description: "Explicitly authorize the configuration commit", const: true, required: true}
+  confirm_replace: {type: boolean, description: "Additionally required true when mode is replace", default: false, required: false}
+  message: {type: string, description: "Optional commit message, at most 256 single-line characters", required: false}
+  revert_in: {type: integer, description: "Optional commit-confirm rollback timer in seconds; only EOS, IOS, and Junos", minimum: 60, maximum: 3600, required: false}
+output:
+  operation: {type: string, required: true}
+  result: {type: object, required: true}
+tags: [napalm, mutating, configuration, commit]

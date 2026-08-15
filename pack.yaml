@@ -1,0 +1,46 @@
+ref: napalm
+label: "NAPALM Network Automation"
+description: "Safety-bounded multi-vendor operational and configuration actions using NAPALM"
+version: "0.1.0"
+author: "Attune; adapted from work by mierdin, Rob Woodward, and StackStorm Exchange contributors"
+email: "support@attune.systems"
+system: false
+enabled: true
+
+conf_schema:
+  default_credential_key:
+    type: string
+    description: "Pack-owned Attune Key containing a NAPALM device profile"
+    default: "napalm.credentials"
+
+config:
+  default_credential_key: "napalm.credentials"
+
+meta:
+  category: integration
+  documentation_url: "https://napalm.readthedocs.io/en/latest/"
+  repository_url: "https://github.com/attune-packs/napalm"
+  source_version: "1.1.0 (8af575b481a28f3a284bbb4cf7073cf72684f1d4)"
+  source_revision: "8af575b481a28f3a284bbb4cf7073cf72684f1d4"
+  license: "Apache-2.0"
+  python_dependencies:
+    - "attune-sdk>=0.1.0"
+    - "napalm==5.2.0"
+
+tags: [napalm, networking, automation, multi-vendor]
+runtime_deps: [python]
+dependencies: []
+
+testing:
+  enabled: true
+  discovery:
+    method: directory
+    path: tests
+  runners:
+    python:
+      type: unittest
+      entry_point: tests/test_pack.py
+      timeout: 120
+      result_format: simple
+  min_pass_rate: 1.0
+  on_failure: block

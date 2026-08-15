@@ -1,0 +1,19 @@
+ref: napalm.get_config
+label: "Get Sanitized Configuration (Read Only)"
+description: "Read device configuration with NAPALM sanitization and additional secret-line redaction"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: napalm_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  retrieve: {type: string, description: "Configuration store", enum: [all, running, candidate, startup], default: all, required: false}
+  full: {type: boolean, description: "Request full configuration where supported", default: false, required: false}
+output:
+  operation: {type: string, required: true}
+  result: {type: object, required: true}
+tags: [napalm, read-only, configuration, redacted]

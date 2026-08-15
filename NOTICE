@@ -1,0 +1,13 @@
+This product includes an adaptation of the StackStorm Exchange NAPALM pack,
+version 1.1.0, originally by mierdin and Rob Woodward and subsequently
+maintained by StackStorm Exchange contributors.
+
+Source: https://github.com/StackStorm-Exchange/stackstorm-napalm
+Revision: 8af575b481a28f3a284bbb4cf7073cf72684f1d4
+License: Apache License 2.0
+
+The implementation, device profiles, credential handling, action boundaries,
+configuration transaction semantics, output contracts, and Attune metadata
+have been substantially modified. The translated implementation was checked
+against NAPALM 5.2.0 at revision
+deafa21d1c86158d03a8e456a5fd4c9165bfb10e.

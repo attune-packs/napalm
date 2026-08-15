@@ -1,0 +1,20 @@
+{
+  "upstream": {
+    "repository": "https://github.com/StackStorm-Exchange/stackstorm-napalm",
+    "version": "1.1.0",
+    "revision": "8af575b481a28f3a284bbb4cf7073cf72684f1d4",
+    "revision_date": "2022-05-13T19:06:22Z",
+    "license": "Apache-2.0",
+    "license_file_git_blob": "8dada3edaf50dbc082c9a125058f25def75e625a"
+  },
+  "api_reference": {
+    "product": "NAPALM",
+    "version": "5.2.0",
+    "repository": "https://github.com/napalm-automation/napalm",
+    "revision": "deafa21d1c86158d03a8e456a5fd4c9165bfb10e",
+    "revision_date": "2026-07-27T14:07:30-05:00",
+    "base_api": "napalm/base/base.py",
+    "support_matrix": "docs/support/index.rst",
+    "verified_at": "2026-08-14"
+  }
+}

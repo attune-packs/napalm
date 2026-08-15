@@ -1,0 +1,19 @@
+ref: napalm.get_bgp_config
+label: "Get BGP Configuration (Read Only, Redacted)"
+description: "Read normalized BGP configuration with authentication values recursively redacted"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: napalm_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  group: {type: string, description: "Optional BGP group name using safe identifier characters", required: false}
+  neighbor: {type: string, description: "Optional IPv4 or IPv6 neighbor address", required: false}
+output:
+  operation: {type: string, required: true}
+  result: {type: object, required: true}
+tags: [napalm, read-only, bgp, redacted]

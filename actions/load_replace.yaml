@@ -1,0 +1,19 @@
+ref: napalm.load_replace
+label: "Preview Replacement Candidate (Transient Mutation)"
+description: "Load and compare a complete replacement candidate, then always discard it; this action never commits"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: napalm_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  config: {type: string, description: "Complete replacement configuration text, limited to 2 MiB", required: true}
+  confirm_replace: {type: boolean, description: "Acknowledge that a later commit would replace the full configuration", const: true, required: true}
+output:
+  operation: {type: string, required: true}
+  result: {type: object, required: true}
+tags: [napalm, candidate-mutating, non-committing, replace]

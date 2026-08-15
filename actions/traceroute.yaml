@@ -1,0 +1,22 @@
+ref: napalm.traceroute
+label: "Device-Originated Traceroute (Read Only)"
+description: "Run a bounded traceroute from the device with injection-resistant target and option validation"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: napalm_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  destination: {type: string, description: "Destination IP address or DNS hostname", required: true}
+  source: {type: string, description: "Optional source IP address or DNS hostname", required: false}
+  ttl: {type: integer, description: "Maximum hops", minimum: 1, maximum: 64, default: 30, required: false}
+  probe_timeout: {type: integer, description: "Per-probe timeout in seconds", minimum: 1, maximum: 10, default: 2, required: false}
+  vrf: {type: string, description: "Optional VRF using safe identifier characters", required: false}
+output:
+  operation: {type: string, required: true}
+  result: {type: object, required: true}
+tags: [napalm, read-only, diagnostics, traceroute]

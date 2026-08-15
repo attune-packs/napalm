@@ -1,0 +1,18 @@
+ref: napalm.discard_config
+label: "Discard Device Candidate (Mutating)"
+description: "Explicitly discard candidate configuration visible to a new session; may affect another operator's candidate"
+enabled: true
+runner_type: python
+runtime_version: ">=3.10"
+entry_point: napalm_action.py
+parameter_delivery: stdin
+parameter_format: json
+output_format: json
+default_execution_permission_set_refs: [standard]
+parameters:
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  confirm: {type: boolean, description: "Explicitly authorize candidate discard", const: true, required: true}
+output:
+  operation: {type: string, required: true}
+  result: {type: object, required: true}
+tags: [napalm, mutating, configuration, discard]
