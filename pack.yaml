@@ -11,10 +11,10 @@ conf_schema:
   default_credential_key:
     type: string
     description: "Pack-owned Attune Key containing a NAPALM device profile"
-    default: "napalm.credentials"
+    default: "pack.napalm.credentials"
 
 config:
-  default_credential_key: "napalm.credentials"
+  default_credential_key: "pack.napalm.credentials"
 
 meta:
   category: integration

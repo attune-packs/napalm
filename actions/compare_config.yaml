@@ -10,7 +10,7 @@ parameter_format: json
 output_format: json
 default_execution_permission_set_refs: [standard]
 parameters:
-  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "pack.napalm.credentials", required: true}
   config: {type: string, description: "Candidate configuration text, limited to 2 MiB", required: true}
   mode: {type: string, description: "Candidate operation", enum: [merge, replace], default: merge, required: false}
   confirm_replace: {type: boolean, description: "Required true when mode is replace; acknowledges full-replacement semantics", default: false, required: false}

@@ -5,6 +5,7 @@ import json
 import os
 import stat
 import sys
+import types
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -14,6 +15,32 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from lib import napalm_client as client
+
+
+class KeyTests(unittest.TestCase):
+    def test_fetch_key_uses_canonical_ref_as_positional_argument(self):
+        parsed = types.SimpleNamespace(data=types.SimpleNamespace(value={"driver": "eos"}))
+        sdk_client = object()
+        fake_attune = types.ModuleType("attune")
+        fake_attune.context = types.SimpleNamespace(client=sdk_client)
+        sync_detailed = mock.Mock(
+            return_value=types.SimpleNamespace(status_code=200, parsed=parsed)
+        )
+        fake_secrets = types.ModuleType("attune.api_client.api.secrets")
+        fake_secrets.get_key = types.SimpleNamespace(sync_detailed=sync_detailed)
+        modules = {
+            "attune": fake_attune,
+            "attune.api_client": types.ModuleType("attune.api_client"),
+            "attune.api_client.api": types.ModuleType("attune.api_client.api"),
+            "attune.api_client.api.secrets": fake_secrets,
+        }
+
+        with mock.patch.dict(sys.modules, modules):
+            client._fetch_key("pack.napalm.credentials")
+
+        sync_detailed.assert_called_once_with(
+            "pack.napalm.credentials", client=sdk_client
+        )
 
 
 def profile(driver="eos", **updates):
@@ -165,7 +192,7 @@ class MetadataContractTests(unittest.TestCase):
                     "entry_point: napalm_action.py", "parameter_delivery: stdin",
                     "parameter_format: json", "output_format: json",
                     "default_execution_permission_set_refs: [standard]",
-                    'default: "napalm.credentials"', "operation: {type: string, required: true}",
+                    'default: "pack.napalm.credentials"', "operation: {type: string, required: true}",
                     "result: {type: object, required: true}",
                 ):
                     self.assertIn(required, text)

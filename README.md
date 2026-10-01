@@ -6,8 +6,9 @@ getters and explicit configuration transactions rather than arbitrary CLI.
 
 ## Device profile
 
-Create one pack-owned Attune Key per device, such as `napalm.edge01`, and pass
-that Key ref as `credential_key`. Password profile example:
+Create one pack-owned Attune Key per device with an `owner_pack_ref` of `napalm`.
+For example, local ref `edge01` has canonical ref `pack.napalm.edge01`; pass the
+canonical ref as `credential_key`. Password profile example:
 
 ```json
 {

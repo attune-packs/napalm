@@ -10,7 +10,7 @@ parameter_format: json
 output_format: json
 default_execution_permission_set_refs: [standard]
 parameters:
-  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "napalm.credentials", required: true}
+  credential_key: {type: string, description: "Pack-owned Attune Key containing the device profile", default: "pack.napalm.credentials", required: true}
   destination: {type: string, description: "IPv4 or IPv6 prefix", required: true}
   protocol: {type: string, description: "Optional routing protocol filter", required: false}
   longer: {type: boolean, description: "Include more-specific routes", default: false, required: false}

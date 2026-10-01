@@ -82,7 +82,7 @@ def _fetch_key(ref: Any) -> dict[str, Any]:
     except ImportError as exc:
         raise NapalmPackError("attune-sdk is required to resolve credential_key") from exc
     try:
-        response = get_key.sync_detailed(ref, client=attune.context.client, decrypt=True)
+        response = get_key.sync_detailed(ref, client=attune.context.client)
     except Exception as exc:
         raise NapalmPackError("unable to read the credential Key") from exc
     status = int(response.status_code)
@@ -566,5 +566,5 @@ def execute_with_profile(operation: str, params: Mapping[str, Any], profile_valu
 
 
 def execute_action(operation: str, params: Mapping[str, Any]) -> dict[str, Any]:
-    profile = _fetch_key(params.get("credential_key", "napalm.credentials"))
+    profile = _fetch_key(params.get("credential_key", "pack.napalm.credentials"))
     return execute_with_profile(operation, params, profile)
